@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini SOC Dashboard</title>
+</head>
+<body>
+    {% for item in data %}
+<tr>
+    <td>{{ item.ip }}</td>
+    <td>{{ item.attempts }}</td>
+    <td>
+        {% if item.risk == "HIGH" %}
+            <span style="color:red;">HIGH</span>
+        {% elif item.risk == "MEDIUM" %}
+            <span style="color:orange;">MEDIUM</span>
+        {% else %}
+            <span style="color:green;">LOW</span>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+    <h1>🚨 Intrusion Detection Dashboard</h1>
+    <table border="1">
+        <tr>
+            <th>IP Address</th>
+            <th>Attempts</th>
+            <th>Risk Level</th>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>{{ item.ip }}</td>
+            <td>{{ item.attempts }}</td>
+            <td>{{ item.risk }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% if data %}
+    <h2>Attack Graph</h2>
+    <img src="{{ url_for('static', filename='graph.png') }}" width="600">
+{% endif %}
+</body>
+</html>
